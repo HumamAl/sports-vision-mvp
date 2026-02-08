@@ -1,6 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 interface CameraViewportProps {
   scanning: boolean;
@@ -14,11 +15,26 @@ function CameraViewport({ scanning, children }: CameraViewportProps) {
         "relative w-full h-full overflow-hidden rounded-lg",
         "bg-[#0a0f1a]"
       )}
-      style={{
-        backgroundImage:
-          "radial-gradient(circle at 20% 30%, rgba(6,182,212,0.03) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(16,185,129,0.02) 0%, transparent 50%), repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.008) 2px, rgba(255,255,255,0.008) 4px)",
-      }}
     >
+      {/* Real camera feed background */}
+      <Image
+        src="https://images.unsplash.com/photo-1551958219-acbc608c6377?w=1920&q=80"
+        alt="Sports field camera feed"
+        fill
+        className="object-cover"
+        priority
+        sizes="100vw"
+      />
+      {/* Dark overlay to simulate camera processing / night vision feel */}
+      <div className="absolute inset-0 bg-[#0a0f1a]/40 mix-blend-multiply" />
+      {/* Subtle scan grid overlay */}
+      <div
+        className="absolute inset-0"
+        style={{
+          backgroundImage:
+            "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(6,182,212,0.03) 2px, rgba(6,182,212,0.03) 4px), repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(6,182,212,0.03) 2px, rgba(6,182,212,0.03) 4px)",
+        }}
+      />
       {/* Corner markers */}
       {/* Top-left */}
       <div className="absolute top-3 left-3 w-8 h-8 z-10">
